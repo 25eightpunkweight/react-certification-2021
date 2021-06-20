@@ -1,0 +1,36 @@
+.homepage {
+  text-align: center;
+  overflow: hidden;
+}
+
+.homepage h1 {
+  font-size: 3rem;
+  letter-spacing: -2px;
+}
+
+div.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3px;
+  padding: 20px;
+  overflow: auto;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  overflow: auto;
+}
+
+.containers {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin: 3px;
+  padding: 20px;
+  overflow: auto;
+}
