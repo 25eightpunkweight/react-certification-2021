@@ -1,10 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-function RelatedVideoCard(props) {
+const VideoCard = styled.div`
+
+`;
+
+function RelatedVideoCard(item) {
+  const videoId = item.id.videoId;
+  const videoTitle = item.snippet.title;
+  const videoDescription = item.snippet.description;
+
   return (
-    <div>
-      <p>Hello!</p>
-    </div>
+    <Link
+      to={{
+        pathname: `/video/${videoId}`,
+        state: {
+          videoId,
+          videoTitle,
+          videoDescription,
+        }
+      }}
+    >
+      <VideoCard>
+        <h3>{videoTitle}</h3>
+      </VideoCard>
+    </Link>
   );
 }
 

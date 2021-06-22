@@ -3,10 +3,14 @@ import styled from 'styled-components';
 
 import RelatedVideoCard from '../RelatedVideoCard';
 
-const RelatedVideosWrapper = styled.div``;
+const RelatedVideosWrapper = styled.div`
+  overflow: scroll;
+  height: 20em;
+  width: 20em;
+  float: right;
+`;
 
 function RelatedVideos(props) {
-  console.log(props.videos);
   return (
     <RelatedVideosWrapper>
       {props.videos.map((d) => RelatedVideoCard(d))}

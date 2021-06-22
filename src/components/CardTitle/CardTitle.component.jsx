@@ -1,8 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-// import { useFortune } from '../../utils/hooks/useFortune';
-// import CardTitleText from '../CardTitleText';
 
 const CardTitleDiv = styled.div`
   margin: 1px;
@@ -15,9 +13,24 @@ const CardTitleText = styled.h4`
 `;
 
 function CardTitle(props) {
+  const videoId = props.item.id.videoId;
+  const videoTitle = props.item.snippet.title;
+  const videoDescription = props.item.snippet.description;
+
   return (
     <CardTitleDiv>
-      <CardTitleText> {props.text} </CardTitleText>
+      <Link
+        to={{
+          pathname: `/video/${videoId}`,
+          state: {
+            videoId,
+            videoTitle,
+            videoDescription,
+          }
+        }}
+      >
+        <CardTitleText> {videoTitle} </CardTitleText>
+      </Link>
     </CardTitleDiv>
   );
 }

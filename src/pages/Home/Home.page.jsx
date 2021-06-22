@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import styled from 'styled-components';
 
 import CardItem from '../../components/CardItem';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import mockData from '../../mock/youtube-mock-data-2.json';
+import { SearchContext } from '../../contexts/SearchContextProvider';
 
 const HomePageWrapper = styled.section`
   text-align: center;
@@ -35,43 +37,43 @@ const Cards = styled.div`
 
 function HomePage() {
   const [errors, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [results, setResults] = useState([]);
-  const apiKey = 'AIzaSyDCv2nlGl7NnX3F-ZHbq6u8WK6mazlsxPY';
+  const [isLoading, setIsLoading] = useState(null);
+  const [results, setResults] = useState(mockData);
+  const [data, setData] = useState('');
+
+  const searchContext = useContext(SearchContext);
+  const searchTerm = encodeURI(searchContext.query);
 
   useEffect(() => {
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=hasanabi&type=video&videoType=any&key=${apiKey}`
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setResults(result);
-          console.log(results);
-          setIsLoaded(true);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(errors);
-        }
-      );
-  }, [errors]);
+    if (searchTerm !== '') {
+      setData(encodeURI(searchContext.query));
+    }
+    // fetch(
+    //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${searchTerm}&type=video&videoType=any&key=AIzaSyDCv2nlGl7NnX3F-ZHbq6u8WK6mazlsxPY`
+    // )
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     setResults(result);
+    //     setIsLoading(false);
+    //   });
+  }, [searchTerm]);
   const sectionRef = useRef(null);
-  // const trimmedArray = results.items;
+  const i = results.items;
 
   if (errors) {
     return <div>Error</div>;
   }
 
-  if (!isLoaded) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <HomePageWrapper ref={sectionRef}>
-      <Container>
-        <Cards>{results.items.map((d) => CardItem(d))}</Cards>
-      </Container>
+    <HomePageWrapper>
+      <p>You Entered {data}</p>
+      {/* <Container>
+        <Cards>{i.map((d) => CardItem(d))}</Cards>
+      </Container> */}
     </HomePageWrapper>
   );
 }

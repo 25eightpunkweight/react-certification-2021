@@ -1,9 +1,10 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import Header from '../Header';
 import Body from '../Body';
 import { random } from '../../utils/fns';
+import { useInput } from '../../hooks/input-hook';
 
 function App() {
   useLayoutEffect(() => {
@@ -24,10 +25,17 @@ function App() {
     };
   }, []);
 
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSubmit = (data) => {
+    debugger;
+    setSearchTerm(data);
+  };
+
   return (
     <BrowserRouter>
-      <Header />
-      <Body />
+      <Header onSubmit={handleSubmit} />
+      <Body searchTerm={searchTerm} />
     </BrowserRouter>
   );
 }

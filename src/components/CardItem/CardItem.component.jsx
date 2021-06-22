@@ -16,18 +16,8 @@ const CardItemDiv = styled.div`
 
 function CardItem(item) {
   return (
-    // <div className="card-item" key={item.etag}>
-    //   <div className="card-title">
-    //     <h4>{item.snippet.title}</h4>
-    //   </div>
-    //   <div className="img__wrap">
-    //     <img className="center" src={item.snippet.thumbnails.medium.url} />
-    //     <p className="img__description">{item.snippet.description}</p>
-    //   </div>
-    // </div>
-
     <CardItemDiv key={item.etag}>
-      <CardTitle text={item.snippet.title} />
+      <CardTitle item={item} />
       <ImgWrap
         image={item.snippet.thumbnails.medium.url}
         hover_text={item.snippet.description}

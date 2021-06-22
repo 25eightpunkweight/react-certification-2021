@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { SearchContext } from '../../contexts/SearchContextProvider';
 
 const ButtonLeft = styled.button`
   left: 0%;
@@ -43,16 +44,20 @@ const HeaderWrap = styled.header`
   background-color: black;
 `;
 
-function submitSearch(searchTerm) {
-  console.log(searchTerm);
-}
-
 function Header() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const searchContext = useContext(SearchContext);
+
+  const handleInput = () => {
+    searchContext.searchHandler(searchQuery);
+  };
+
   return (
     <HeaderWrap>
       <ButtonLeft>Navigation</ButtonLeft>
-      <form onSubmit={submitSearch}>
-        <SearchField name="searchTerm" />
+      <form onSubmit={handleInput}>
+        <SearchField type="text" onChange={(e) => setSearchQuery(e.target.value)} />
       </form>
       <ButtonRight>Login</ButtonRight>
     </HeaderWrap>
