@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import CardItem from '../../components/CardItem';
 import LoadingSpinner from '../../components/LoadingSpinner';
-import mockData from '../../mock/youtube-videos-mock.json.json';
+import mockData from '../../mock/youtube-videos-mock.json';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 
 const HomePageWrapper = styled.section`
