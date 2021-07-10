@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 import { AccountContext } from '../../contexts/AccountContextProvider';
-import ToggleButton from '../ToggleButton';
 import AvatarLogo from '../AvatarLogo';
+import ToggleButton from '../ToggleButton'
 
 const LinkButtonLeft = styled(Link)`
   left: 0%;
@@ -177,11 +177,11 @@ function Header() {
                 <StyledLI>
                   <Link
                     to={{
-                      pathname: '/',
+                      pathname: '/favorites',
                     }}
-                    onClick={logMeOut}
+                    onclick={handleMenuOpen}
                   >
-                    Logout
+                    Favorites
                   </Link>
                 </StyledLI>
               )}
@@ -189,11 +189,11 @@ function Header() {
                 <StyledLI>
                   <Link
                     to={{
-                      pathname: '/favorites',
+                      pathname: '/',
                     }}
-                    onclick={handleMenuOpen}
+                    onClick={logMeOut}
                   >
-                    Favorites
+                    Logout
                   </Link>
                 </StyledLI>
               )}

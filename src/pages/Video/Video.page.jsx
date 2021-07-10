@@ -6,6 +6,7 @@ import VideoEmbed from '../../components/VideoEmbed';
 import RelatedVideos from '../../components/RelatedVideos';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 import { AccountContext } from '../../contexts/AccountContextProvider';
+import { storage } from '../../utils/storage';
 
 const VideoSection = styled.section`
   margin-top: 5rem;
@@ -84,7 +85,17 @@ const ButtonWrapper = styled.div`
 
 function Video() {
   const location = useLocation();
-  const { videoId, videoTitle, videoDescription, etag } = location.state;
+
+  let routeState;
+
+  if (location.state) {
+    storage.set('videoLocationState', JSON.stringify(location.state));
+    routeState = location.state;
+  } else {
+    routeState = storage.get('videoLocationState');
+    if (routeState) routeState = JSON.parse(routeState);
+  }
+  const { videoId, videoTitle, videoDescription, etag } = routeState;
   const buildURL = `https://www.youtube.com/embed/${videoId}`;
 
   const darkModeContext = useContext(AppearanceContext);
@@ -103,7 +114,7 @@ function Video() {
   };
 
   return (
-    <VideoSection>
+    <VideoSection data-testid="video-display">
       <VideoDiv>
         <VideoEmbed url={buildURL} />
       </VideoDiv>

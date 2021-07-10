@@ -7,6 +7,8 @@ const AppearanceContext = React.createContext({
   themeChangeHandler: () => {},
 });
 
+
+
 const AppearanceContextProvider = (props) => {
   const [darkMode, setDarkMode] = useState(false);
 

@@ -1,11 +1,22 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { renderHook, act } from '@testing-library/react-hooks';
+import AppearanceContextProvider, {
+  AppearanceContext,
+} from '../../contexts/AppearanceContextProvider';
 
 import RelatedVideoCard from './index';
 
-describe('Render DrawerToggle', () => {
+const wrapper = ({ children }) => (
+  <AppearanceContext.Provider value={{ darkMode: false, themeChangeHandler: jest.fn }}>
+    {children}
+  </AppearanceContext.Provider>
+);
+
+describe('RelatedVideoCard', () => {
   const testItem = {
+    etag: 'kpIJtPbs0nr37t4InqV925ytEXY',
     id: {
       videoId: 'C0DPdy98e4c',
     },
@@ -20,9 +31,15 @@ describe('Render DrawerToggle', () => {
     },
   };
 
-  test('RelatedVideoCard element exists', () => {
-    render(<Router>{RelatedVideoCard(testItem)}</Router>);
-    expect(screen.getByTestId('related-video-card')).toBeTruthy();
+  it('RelatedVideoCard element exists', () => {
+    const { result } = renderHook(
+      () => <RelatedVideoCard key={testItem.etag} item={testItem} favVids={false} />,
+      {
+        wrapper,
+      }
+    );
+
+    expect(result.current.type).toBe(RelatedVideoCard);
   });
 
   // test.skip('calls onClick when clicked', () => {
