@@ -86,7 +86,7 @@ function LoginModal(props) {
   };
 
   return (
-    <ModalBackground>
+    <ModalBackground data-testid="login-modal-background">
       <LoginContainer>
         <XButton onClick={goBack}>&times;</XButton>
         <h2>Welcome!</h2>

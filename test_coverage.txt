@@ -1,0 +1,99 @@
+
+> react-certification-2020@0.1.0 coverage /home/david/bootcamp/react-certification-2021
+> react-scripts test --env=jsdom --watchAll=false --coverage
+
+---------------------------------|----------|----------|----------|----------|-------------------|
+File                             |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+---------------------------------|----------|----------|----------|----------|-------------------|
+All files                        |    72.73 |       50 |    53.33 |    73.22 |                   |
+ src                             |    14.29 |        0 |        0 |    14.29 |                   |
+  index.js                       |        0 |      100 |      100 |        0 |                12 |
+  login.api.js                   |    16.67 |        0 |        0 |    16.67 |    11,12,13,14,16 |
+ src/components/App              |        0 |      100 |        0 |        0 |                   |
+  App.component.jsx              |        0 |      100 |        0 |        0 |                27 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/AvatarLogo       |      100 |       50 |      100 |      100 |                   |
+  AvatarLogo.component.jsx       |      100 |       50 |      100 |      100 |                22 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/Body             |       80 |    66.67 |       50 |       80 |                   |
+  Body.component.jsx             |       80 |    66.67 |       50 |       80 |                40 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/CardItem         |      100 |       50 |      100 |      100 |                   |
+  CardItem.component.jsx         |      100 |       50 |      100 |      100 |                11 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/CardTitle        |      100 |       50 |      100 |      100 |                   |
+  CardTitle.component.jsx        |      100 |       50 |      100 |      100 |             14,28 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/CardTitleText    |        0 |      100 |        0 |        0 |                   |
+  CardTitleText.component.jsx    |        0 |      100 |        0 |        0 |              4,10 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/CenteredImage    |      100 |      100 |      100 |      100 |                   |
+  CenteredImage.component.jsx    |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/Fortune          |        0 |      100 |        0 |        0 |                   |
+  Fortune.component.jsx          |        0 |      100 |        0 |        0 |               7,9 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/Header           |    71.79 |    14.29 |    36.36 |    71.79 |                   |
+  Header.component.jsx           |    71.79 |    14.29 |    36.36 |    71.79 |... 31,132,152,155 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/ImageHover       |        0 |      100 |        0 |        0 |                   |
+  ImageHover.component.jsx       |        0 |      100 |        0 |        0 |              4,24 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/ImgWrap          |      100 |       50 |      100 |      100 |                   |
+  ImgWrap.component.jsx          |      100 |       50 |      100 |      100 |                17 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/Layout           |      100 |      100 |      100 |      100 |                   |
+  Layout.component.jsx           |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/LoadingSpinner   |      100 |      100 |      100 |      100 |                   |
+  LoadingSpinner.component.jsx   |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/LoginModal       |    58.33 |       50 |       25 |    58.33 |                   |
+  LoginModal.component.jsx       |    58.33 |       50 |       25 |    58.33 |... 0,83,84,99,105 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/Private          |        0 |        0 |        0 |        0 |                   |
+  Private.component.jsx          |        0 |        0 |        0 |        0 |          6,7,9,10 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/RelatedVideoCard |      100 |       50 |      100 |      100 |                   |
+  RelatedVideoCard.component.jsx |      100 |       50 |      100 |      100 |          10,18,54 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/RelatedVideos    |     87.5 |       75 |      100 |     87.5 |                   |
+  RelatedVideos.component.jsx    |     87.5 |       75 |      100 |     87.5 |       40,52,53,66 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/ToggleButton     |      100 |      100 |      100 |      100 |                   |
+  ToggleButton.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/VideoEmbed       |      100 |      100 |      100 |      100 |                   |
+  VideoEmbed.component.jsx       |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/components/VideoLayout      |       50 |      100 |        0 |       50 |                   |
+  VideoLayout.component.jsx      |       50 |      100 |        0 |       50 |                17 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/contexts                    |    26.09 |      100 |        0 |    27.27 |                   |
+  AccountContextProvider.jsx     |    18.18 |      100 |        0 |       20 |... 27,47,50,51,54 |
+  AppearanceContextProvider.jsx  |    33.33 |      100 |        0 |    33.33 |       13,15,16,19 |
+  SearchContextProvider.jsx      |    33.33 |      100 |        0 |    33.33 |       11,13,14,17 |
+ src/hooks                       |        0 |      100 |        0 |        0 |                   |
+  input-hook.js                  |        0 |      100 |        0 |        0 |        3,4,6,9,13 |
+ src/pages/FavoriteVideo         |      100 |       50 |      100 |      100 |                   |
+  FavoriteVideo.page.jsx         |      100 |       50 |      100 |      100 |          23,70,74 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/pages/Favorites             |       80 |       50 |       50 |       80 |                   |
+  Favorites.page.jsx             |       80 |       50 |       50 |       80 |             50,58 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/pages/Home                  |     87.5 |       80 |      100 |     87.5 |                   |
+  Home.page.jsx                  |     87.5 |       80 |      100 |     87.5 |          61,62,74 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/pages/NotFound              |      100 |      100 |      100 |      100 |                   |
+  NotFound.page.jsx              |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/pages/Video                 |    81.48 |       50 |       80 |    84.62 |                   |
+  Video.page.jsx                 |    81.48 |       50 |       80 |    84.62 |     95,96,107,113 |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/test                        |      100 |      100 |      100 |      100 |                   |
+  TestAppContainer.jsx           |      100 |      100 |      100 |      100 |                   |
+  index.js                       |        0 |        0 |        0 |        0 |                   |
+ src/utils                       |    44.44 |      100 |       50 |    44.44 |                   |
+  constants.js                   |      100 |      100 |      100 |      100 |                   |
+  storage.js                     |    28.57 |      100 |       50 |    28.57 |         3,4,5,7,8 |
+---------------------------------|----------|----------|----------|----------|-------------------|

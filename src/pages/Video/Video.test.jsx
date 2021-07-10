@@ -18,7 +18,7 @@ describe('Video', () => {
       videoTitle: 'TEST VIDEO',
       videoDescription: 'COUNTING LEADER AND TONE',
       etag: 'test#testvideo',
-  };
+    };
     history.push(route, state);
 
     render(

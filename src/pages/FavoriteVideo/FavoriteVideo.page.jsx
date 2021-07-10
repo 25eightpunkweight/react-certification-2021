@@ -94,7 +94,7 @@ function FavoriteVideo(props) {
   const isLoggedIn = !!loggedInContext.account;
 
   return (
-    <VideoSection>
+    <VideoSection data-testid="video-display">
       <VideoDiv>
         <VideoEmbed url={buildURL} />
       </VideoDiv>

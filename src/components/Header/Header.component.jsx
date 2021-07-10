@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
@@ -95,7 +95,6 @@ const DropDownMenuButton = styled.div`
 `;
 
 function Header() {
-  const location = useLocation();
   const history = useHistory();
   const container = useRef();
 
@@ -141,20 +140,20 @@ function Header() {
 
   return (
     <HeaderWrap theme={{ darkMode: darkModeContext.darkMode }}>
-      <LinkButtonLeft
+      <LinkButtonLeft data-testid="go-to-home"
         to={{
           pathname: '/',
         }}
       >
         Home
       </LinkButtonLeft>
-      <FormWrapper>
+      <FormWrapper data-testid="search-input">
         <form onSubmit={handleInput}>
           <SearchField type="text" onChange={(e) => setSearchQuery(e.target.value)} />
         </form>
       </FormWrapper>
       <DarkModeToggleButton onChange={(e) => handleToggle(e.target.value)} />
-      <DropDownMenuContainer ref={container}>
+      <DropDownMenuContainer ref={container} data-testid="header-account-dropdown">
         <DropDownMenuButton type="button" onClick={handleMenuOpen}>
           <AvatarLogo />
         </DropDownMenuButton>
@@ -166,7 +165,6 @@ function Header() {
                   <Link
                     to={{
                       pathname: '/login',
-                      state: { background: location },
                     }}
                   >
                     Login

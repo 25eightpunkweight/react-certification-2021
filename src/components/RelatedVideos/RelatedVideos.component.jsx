@@ -71,7 +71,7 @@ function RelatedVideos(props) {
   }
 
   return (
-    <RelatedVideosWrapper>
+    <RelatedVideosWrapper data-testid='related-videos'>
       <h2>{elementTitle}</h2>
       {results &&
         results.map((d) => {

@@ -45,7 +45,6 @@ function HomePage() {
   const [errors, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [results, setResults] = useState(mockData);
-
   const searchContext = useContext(SearchContext);
   const APIKey = API_KEY;
 
@@ -82,7 +81,7 @@ function HomePage() {
   return (
     <HomePageWrapper>
       <Container>
-        <Cards>
+        <Cards data-testid="cards">
           {results &&
             results.items.map((d) => {
               return <CardItem key={d.etag} item={d} />;
