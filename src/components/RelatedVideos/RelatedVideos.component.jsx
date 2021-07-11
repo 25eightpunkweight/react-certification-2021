@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import RelatedVideoCard from '../RelatedVideoCard';
 import { API_KEY } from '../../utils/constants';
 import { AccountContext } from '../../contexts/AccountContextProvider';
+import { storage } from '../../utils/storage';
 
 const RelatedVideosWrapper = styled.div`
   height: fit-content;
@@ -35,7 +36,7 @@ function RelatedVideos(props) {
 
   const favoriteVideos = () => {
     if (favVids) {
-      return loggedInContext.favoriteVideos;
+      return storage.get('favoriteVideos').items;
     }
     return null;
   };
@@ -71,13 +72,14 @@ function RelatedVideos(props) {
   }
 
   return (
-    <RelatedVideosWrapper data-testid='related-videos'>
+    <RelatedVideosWrapper data-testid="related-videos">
       <h2>{elementTitle}</h2>
       {results &&
         results.map((d) => {
           if (d.snippet) {
             return <RelatedVideoCard key={d.etag} item={d} favVids={favVids} />;
           }
+          return <h1>Error</h1>;
         })}
       <EmptyDiv />
     </RelatedVideosWrapper>

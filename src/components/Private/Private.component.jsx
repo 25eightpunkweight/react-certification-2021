@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { AccountContext } from '../../contexts/AccountContextProvider';
+import { storage } from '../../utils/storage';
 
 function Private({ children, ...rest }) {
-  const loggedInContext = useContext(AccountContext);
-  const isLoggedIn = !!loggedInContext.account;
+  const isLoggedIn = !!storage.get('account');
 
   return (
     <Route {...rest} render={() => (isLoggedIn ? children : <Redirect to="/login" />)} />

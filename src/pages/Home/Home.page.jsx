@@ -1,45 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import styled from 'styled-components';
 
 import CardItem from '../../components/CardItem';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import mockData from '../../mock/youtube-videos-mock.json';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import { API_KEY } from '../../utils/constants';
-
-const HomePageWrapper = styled.section`
-  text-align: center;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  & > h1 {
-    font-size: 3rem;
-    letter-spacing: -2px;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  margin: 3px;
-  padding: 20px;
-  overflow: auto;
-`;
-
-const Cards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 3px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  overflow: auto;
-  align-items: center;
-`;
+import Styled from './Home.styled';
 
 function HomePage() {
   const [errors, setError] = useState(false);
@@ -79,16 +45,16 @@ function HomePage() {
   }
 
   return (
-    <HomePageWrapper>
-      <Container>
-        <Cards data-testid="cards">
+    <Styled.HomePageWrapper>
+      <Styled.Container>
+        <Styled.Cards data-testid="cards">
           {results &&
             results.items.map((d) => {
               return <CardItem key={d.etag} item={d} />;
             })}
-        </Cards>
-      </Container>
-    </HomePageWrapper>
+        </Styled.Cards>
+      </Styled.Container>
+    </Styled.HomePageWrapper>
   );
 }
 

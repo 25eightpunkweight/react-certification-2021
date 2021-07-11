@@ -21,7 +21,7 @@ function AvatarLogo(props) {
 
   const img = loggedInContext.account
     ? loggedInContext.account.avatarUrl
-    : './empty_avatar.png';
+    : 'empty_avatar.png';
 
   return (
     <span>

@@ -6,6 +6,7 @@ import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 import { AccountContext } from '../../contexts/AccountContextProvider';
 import AvatarLogo from '../AvatarLogo';
 import ToggleButton from '../ToggleButton'
+import { storage } from '../../utils/storage';
 
 const LinkButtonLeft = styled(Link)`
   left: 0%;
@@ -120,11 +121,15 @@ function Header() {
   };
 
   const logMeOut = () => {
+    if (storage.get('account')) {
+      storage.set('account', null);
+      window.localStorage.clear();
+    }
     loggedInContext.accountChange(null);
     setOpen(!open);
   };
 
-  const isLoggedIn = !!loggedInContext.account;
+  const isLoggedIn = !!storage.get('account');
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -140,7 +145,8 @@ function Header() {
 
   return (
     <HeaderWrap theme={{ darkMode: darkModeContext.darkMode }}>
-      <LinkButtonLeft data-testid="go-to-home"
+      <LinkButtonLeft
+        data-testid="go-to-home"
         to={{
           pathname: '/',
         }}

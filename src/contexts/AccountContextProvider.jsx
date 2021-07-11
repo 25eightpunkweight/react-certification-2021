@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 
 const AccountContext = React.createContext({
-  account: {
-    id: null,
-    name: null,
-    avatar: null,
-  },
+  account: null,
   favoriteVideos: [],
   addFaveVideo: () => {},
   accountChange: () => {},
@@ -13,7 +9,7 @@ const AccountContext = React.createContext({
 
 const AccountContextProvider = (props) => {
   const [account, setAccount] = useState(AccountContext.account);
-  const [favoriteVideos, setFavoriteVideos] = useState([]);
+  const [favoriteVideos, setFavoriteVideos] = useState(AccountContext.favoriteVideos);
 
   const addFaveVideo = (add) => {
     // add looks like this:

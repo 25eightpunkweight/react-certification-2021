@@ -16,11 +16,14 @@ const CardTitleText = styled.h4`
 `;
 
 function CardTitle(props) {
-  const { videoId } = props.item.id;
-  const videoTitle = props.item.snippet.title;
-  const videoDescription = props.item.snippet.description;
-  const { etag } = props.item;
-  const { fav } = props;
+  const {
+    fav,
+    item: {
+      id: { videoId },
+      etag,
+      snippet: { title: videoTitle, description: videoDescription },
+    },
+  } = props;
 
   const darkModeContext = useContext(AppearanceContext);
 

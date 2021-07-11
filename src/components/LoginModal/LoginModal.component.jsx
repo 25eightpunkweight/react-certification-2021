@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import loginApi from '../../login.api';
 
-import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 import { AccountContext } from '../../contexts/AccountContextProvider';
+import { storage } from '../../utils/storage';
 
 const ModalBackground = styled.div`
   display: block;
@@ -71,11 +71,13 @@ function LoginModal(props) {
     history.goBack();
   };
 
+  const store = storage;
+
   const handleLogin = () => {
     loginApi(user, password)
       .then((res) => {
-        // set the accountContext here
-        loginContext.accountChange(res);
+        store.set('account', res);
+        loginContext.accountChange({ avatarUrl: res.avatarUrl });
         setHasError('');
         history.goBack();
       })

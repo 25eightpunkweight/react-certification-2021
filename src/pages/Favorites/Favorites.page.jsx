@@ -1,48 +1,16 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
 
+import Styled from './Favorites.styled';
 import CardItem from '../../components/CardItem';
 import { AccountContext } from '../../contexts/AccountContextProvider';
-
-const FavoritesPageWrapper = styled.section`
-  text-align: center;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  & > h1 {
-    font-size: 3rem;
-    letter-spacing: -2px;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  margin: 3px;
-  padding: 20px;
-  overflow: auto;
-`;
-
-const Cards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 3px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 20px;
-  overflow: auto;
-  align-items: center;
-`;
+import { storage } from '../../utils/storage';
 
 function FavoritesPage() {
   const loggedInContext = useContext(AccountContext);
 
   // eslint-disable-next-line no-unused-vars
-  const [favVids, setFavVids] = useState(loggedInContext.favoriteVideos);
+  // const [favVids, setFavVids] = useState(loggedInContext.favoriteVideos);
+  const favVids = storage.get('favoriteVideos').items;
 
   const hasFavVids = !favVids;
 
@@ -51,15 +19,15 @@ function FavoritesPage() {
   }
 
   return (
-    <FavoritesPageWrapper>
-      <Container>
-        <Cards>
+    <Styled.FavoritesPageWrapper>
+      <Styled.Container>
+        <Styled.Cards>
           {favVids.map((d) => {
             return <CardItem item={d} fav />;
           })}
-        </Cards>
-      </Container>
-    </FavoritesPageWrapper>
+        </Styled.Cards>
+      </Styled.Container>
+    </Styled.FavoritesPageWrapper>
   );
 }
 
