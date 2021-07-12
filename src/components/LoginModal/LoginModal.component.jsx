@@ -38,26 +38,27 @@ function LoginModal(props) {
   return (
     <Styled.ModalBackground data-testid="login-modal-background">
       <Styled.LoginContainer>
-        <Styled.XButton onClick={goBack}>&times;</Styled.XButton>
-        <h2>Welcome!</h2>
-        <Styled.ErrorMessage>{hasError}</Styled.ErrorMessage>
-        <form onSubmit={handleLogin}>
-          <h3>Username</h3>
+        <div>
+          <Styled.XButton onClick={goBack}>&times;</Styled.XButton>
+        </div>
+        <Styled.LoginForm onSubmit={handleLogin}>
+          <Styled.Title>Welcome!</Styled.Title>
+          <Styled.AltTitle>you may login here</Styled.AltTitle>
+          <Styled.ErrorMessage>{hasError}</Styled.ErrorMessage>
           <Styled.Input
             type="text"
             placeholder="username"
             onChange={(e) => setUser(e.target.value)}
           />
-          <h3>Password</h3>
           <Styled.Input
             type="password"
             placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="button" onClick={handleLogin}>
+          <Styled.LoginSubmit type="button" onClick={handleLogin}>
             Login
-          </button>
-        </form>
+          </Styled.LoginSubmit>
+        </Styled.LoginForm>
       </Styled.LoginContainer>
     </Styled.ModalBackground>
   );

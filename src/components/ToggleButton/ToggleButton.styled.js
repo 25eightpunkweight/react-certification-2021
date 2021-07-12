@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const CheckBoxWrapper = styled.div`
   position: relative;
+  margin-top: 35%;
 `;
 const CheckBoxLabel = styled.label`
   position: absolute;

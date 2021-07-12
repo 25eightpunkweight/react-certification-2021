@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Styled from './RelatedVideos.styled';
 
 import RelatedVideoCard from '../RelatedVideoCard';
 import { API_KEY } from '../../utils/constants';
 import { storage } from '../../utils/storage';
-
 
 function RelatedVideos(props) {
   const APIKey = API_KEY;

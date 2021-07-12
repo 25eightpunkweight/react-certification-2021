@@ -2,9 +2,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ToggleButton from '../ToggleButton';
 
+const StyledLink = styled(Link)`
+  color: black;
+`;
+
 const LinkButtonLeft = styled(Link)`
   left: 0%;
   float: left;
+  height: fit-content;
   /* Adapt the colors based on primary prop */
   background: #ede9e8;
   color: gray;
@@ -41,7 +46,7 @@ const HeaderWrap = styled.header`
   text-align: center;
   color: white;
   margin: 0;
-  height: 5em;
+  height: 4em;
   /* background-color: rgba(29, 106, 154, 1); */
   background-color: ${(props) =>
     props.theme.darkMode ? `rgb(0, 52, 85)` : `rgb(29, 106, 154, 1)`};
@@ -61,6 +66,7 @@ const StyledUL = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  background: whitesmoke;
 `;
 
 const StyledLI = styled.li`
@@ -81,9 +87,12 @@ const DropDownMenuContainer = styled.div`
 const DropDownMenuButton = styled.div`
   padding: 0;
   width: 50px;
+  height: 50px;
+  margin-top: 10%;
   border: 0;
   background-color: #fff;
   color: #333;
+  background-color: transparent;
   cursor: pointer;
   outline: 0;
   font-size: 40px;
@@ -100,6 +109,7 @@ const Styled = {
   StyledLI,
   DropDownMenuContainer,
   DropDownMenuButton,
+  StyledLink,
 };
 
 export default Styled;

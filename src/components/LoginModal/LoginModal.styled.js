@@ -1,5 +1,23 @@
 import styled from 'styled-components';
 
+const LoginForm = styled.form`
+  display: flex;
+  padding: 1%;
+  flex-direction: column;
+`;
+
+const Title = styled.h2`
+  margin: 0;
+`;
+
+const AltTitle = styled.h5`
+  margin: 0;
+`;
+
+const LoginSubmit = styled.button`
+
+`;
+
 const ModalBackground = styled.div`
   display: block;
   position: fixed;
@@ -15,9 +33,13 @@ const ModalBackground = styled.div`
 
 const XButton = styled.span`
   color: #aaa;
-  float: right;
+  margin-right: auto;
   font-size: 28px;
   font-weight: bold;
+  height: 1%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
 
   &:hover,
   &:focus {
@@ -33,15 +55,18 @@ const Input = styled.input`
   border: 1px solid black;
   line-height: 1.5em;
   padding: 5px;
+  text-align: center;
 `;
 
 const LoginContainer = styled.div`
+  position: relative;
   height: 40%;
-  width: 40%;
-  float: right;
-  margin-right: 50%;
-  margin-left: 50%;
-  margin-top: 10%;
+  width: 20%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 15%;
   align-items: center;
   background-color: ${(props) =>
     props.theme.darkMode ? `rgb(0, 52, 85)` : `rgb(29, 106, 154, 1)`};
@@ -57,6 +82,10 @@ const Styled = {
   Input,
   LoginContainer,
   ErrorMessage,
+  Title,
+  AltTitle,
+  LoginSubmit,
+  LoginForm,
 };
 
 export default Styled;

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 import { AccountContext } from '../../contexts/AccountContextProvider';
@@ -83,37 +83,38 @@ function Header() {
             <Styled.StyledUL>
               {!isLoggedIn && (
                 <Styled.StyledLI>
-                  <Link
+                  <Styled.StyledLink
                     to={{
                       pathname: '/login',
                     }}
+                    onClick={handleMenuOpen}
                   >
                     Login
-                  </Link>
+                  </Styled.StyledLink>
                 </Styled.StyledLI>
               )}
               {isLoggedIn && (
                 <Styled.StyledLI>
-                  <Link
+                  <Styled.StyledLink
                     to={{
                       pathname: '/favorites',
                     }}
-                    onclick={handleMenuOpen}
+                    onClick={handleMenuOpen}
                   >
                     Favorites
-                  </Link>
+                  </Styled.StyledLink>
                 </Styled.StyledLI>
               )}
               {isLoggedIn && (
                 <Styled.StyledLI>
-                  <Link
+                  <Styled.StyledLink
                     to={{
                       pathname: '/',
                     }}
                     onClick={logMeOut}
                   >
                     Logout
-                  </Link>
+                  </Styled.StyledLink>
                 </Styled.StyledLI>
               )}
             </Styled.StyledUL>
