@@ -8,6 +8,7 @@ import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 
 function FavoriteVideo() {
   const location = useLocation();
+  // eslint-disable-next-line no-unused-vars
   const { videoId, videoTitle, videoDescription, etag } = location.state;
   const buildURL = `https://www.youtube.com/embed/${videoId}`;
 

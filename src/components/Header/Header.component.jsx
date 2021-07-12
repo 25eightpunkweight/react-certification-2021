@@ -1,99 +1,11 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 import { AccountContext } from '../../contexts/AccountContextProvider';
 import AvatarLogo from '../AvatarLogo';
-import ToggleButton from '../ToggleButton'
 import { storage } from '../../utils/storage';
-
-const LinkButtonLeft = styled(Link)`
-  left: 0%;
-  float: left;
-  /* Adapt the colors based on primary prop */
-  background: #ede9e8;
-  color: gray;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid black;
-  border-radius: 3px;
-`;
-
-const FormWrapper = styled.div`
-  padding-top: 10px;
-  left: 50%;
-  right: 50%;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const SearchField = styled.input`
-  padding: 12px 15px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: 18px;
-  min-width: 400px;
-`;
-
-const DarkModeToggleButton = styled(ToggleButton)`
-  float: right;
-`;
-
-const HeaderWrap = styled.header`
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  color: white;
-  margin: 0;
-  height: 5em;
-  /* background-color: rgba(29, 106, 154, 1); */
-  background-color: ${(props) =>
-    props.theme.darkMode ? `rgb(0, 52, 85)` : `rgb(29, 106, 154, 1)`};
-`;
-
-const DropDownMenu = styled.div`
-  position: absolute;
-  top: 100%;
-  right: 0;
-  width: 300px;
-  z-index: 2;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-`;
-
-const StyledUL = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0;
-`;
-
-const StyledLI = styled.li`
-  color: black;
-  padding: 8px 12px;
-  &:hover,
-  &:focus {
-    background-color: rgba(0, 0, 0, 0.14);
-    cursor: pointer;
-  }
-`;
-
-const DropDownMenuContainer = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-const DropDownMenuButton = styled.div`
-  padding: 0;
-  width: 50px;
-  border: 0;
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
-  outline: 0;
-  font-size: 40px;
-`;
+import Styled from './Header.styled';
 
 function Header() {
   const history = useHistory();
@@ -144,30 +56,33 @@ function Header() {
   }, [container]);
 
   return (
-    <HeaderWrap theme={{ darkMode: darkModeContext.darkMode }}>
-      <LinkButtonLeft
+    <Styled.HeaderWrap theme={{ darkMode: darkModeContext.darkMode }}>
+      <Styled.LinkButtonLeft
         data-testid="go-to-home"
         to={{
           pathname: '/',
         }}
       >
         Home
-      </LinkButtonLeft>
-      <FormWrapper data-testid="search-input">
+      </Styled.LinkButtonLeft>
+      <Styled.FormWrapper data-testid="search-input">
         <form onSubmit={handleInput}>
-          <SearchField type="text" onChange={(e) => setSearchQuery(e.target.value)} />
+          <Styled.SearchField
+            type="text"
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </form>
-      </FormWrapper>
-      <DarkModeToggleButton onChange={(e) => handleToggle(e.target.value)} />
-      <DropDownMenuContainer ref={container} data-testid="header-account-dropdown">
-        <DropDownMenuButton type="button" onClick={handleMenuOpen}>
+      </Styled.FormWrapper>
+      <Styled.DarkModeToggleButton onChange={(e) => handleToggle(e.target.value)} />
+      <Styled.DropDownMenuContainer ref={container} data-testid="header-account-dropdown">
+        <Styled.DropDownMenuButton type="button" onClick={handleMenuOpen}>
           <AvatarLogo />
-        </DropDownMenuButton>
+        </Styled.DropDownMenuButton>
         {open && (
-          <DropDownMenu>
-            <StyledUL>
+          <Styled.DropDownMenu>
+            <Styled.StyledUL>
               {!isLoggedIn && (
-                <StyledLI>
+                <Styled.StyledLI>
                   <Link
                     to={{
                       pathname: '/login',
@@ -175,10 +90,10 @@ function Header() {
                   >
                     Login
                   </Link>
-                </StyledLI>
+                </Styled.StyledLI>
               )}
               {isLoggedIn && (
-                <StyledLI>
+                <Styled.StyledLI>
                   <Link
                     to={{
                       pathname: '/favorites',
@@ -187,10 +102,10 @@ function Header() {
                   >
                     Favorites
                   </Link>
-                </StyledLI>
+                </Styled.StyledLI>
               )}
               {isLoggedIn && (
-                <StyledLI>
+                <Styled.StyledLI>
                   <Link
                     to={{
                       pathname: '/',
@@ -199,13 +114,13 @@ function Header() {
                   >
                     Logout
                   </Link>
-                </StyledLI>
+                </Styled.StyledLI>
               )}
-            </StyledUL>
-          </DropDownMenu>
+            </Styled.StyledUL>
+          </Styled.DropDownMenu>
         )}
-      </DropDownMenuContainer>
-    </HeaderWrap>
+      </Styled.DropDownMenuContainer>
+    </Styled.HeaderWrap>
   );
 }
 

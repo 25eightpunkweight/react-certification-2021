@@ -1,19 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Styled from './CardTitle.styled';
 
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
-
-const CardTitleDiv = styled.div`
-  margin: 1px;
-  height: 56px;
-`;
-
-const CardTitleText = styled.h4`
-  /* color: blue; */
-  color: ${(props) => (props.theme.darkMode ? `rgb(256, 256, 256)` : `rgb(0, 0, 0)`)};
-  font-size: 1em;
-`;
 
 function CardTitle(props) {
   const {
@@ -41,13 +30,13 @@ function CardTitle(props) {
   };
 
   return (
-    <CardTitleDiv>
+    <Styled.CardTitleDiv>
       <Link to={path}>
-        <CardTitleText theme={{ darkMode: darkModeContext.darkMode }}>
+        <Styled.CardTitleText theme={{ darkMode: darkModeContext.darkMode }}>
           {videoTitle}
-        </CardTitleText>
+        </Styled.CardTitleText>
       </Link>
-    </CardTitleDiv>
+    </Styled.CardTitleDiv>
   );
 }
 

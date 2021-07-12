@@ -1,33 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
-import styled from 'styled-components';
+import Styled from './RelatedVideos.styled';
 
 import RelatedVideoCard from '../RelatedVideoCard';
 import { API_KEY } from '../../utils/constants';
-import { AccountContext } from '../../contexts/AccountContextProvider';
 import { storage } from '../../utils/storage';
 
-const RelatedVideosWrapper = styled.div`
-  height: fit-content;
-  text-align: center;
-  width: 100%;
-  float: right;
-  margin: 0px;
-  margin-left: auto;
-  margin-right: auto;
-  float: left;
-  display: flex;
-  flex-direction: column;
-`;
-
-const EmptyDiv = styled.div`
-  width: 360px;
-  height: 112px;
-`;
 
 function RelatedVideos(props) {
   const APIKey = API_KEY;
-
-  const loggedInContext = useContext(AccountContext);
 
   const { videoId, favVids } = props;
   const [errors, setError] = useState(false);
@@ -35,7 +15,7 @@ function RelatedVideos(props) {
   const [results, setResults] = useState(null);
 
   const favoriteVideos = () => {
-    if (favVids) {
+    if (favVids && storage.get('favoriteVideos')) {
       return storage.get('favoriteVideos').items;
     }
     return null;
@@ -72,7 +52,7 @@ function RelatedVideos(props) {
   }
 
   return (
-    <RelatedVideosWrapper data-testid="related-videos">
+    <Styled.RelatedVideosWrapper data-testid="related-videos">
       <h2>{elementTitle}</h2>
       {results &&
         results.map((d) => {
@@ -81,8 +61,8 @@ function RelatedVideos(props) {
           }
           return <h1>Error</h1>;
         })}
-      <EmptyDiv />
-    </RelatedVideosWrapper>
+      <Styled.EmptyDiv />
+    </Styled.RelatedVideosWrapper>
   );
 }
 

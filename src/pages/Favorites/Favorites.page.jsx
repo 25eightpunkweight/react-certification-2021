@@ -1,20 +1,22 @@
-import React, { useState, useContext } from 'react';
+import React from 'react';
 
 import Styled from './Favorites.styled';
 import CardItem from '../../components/CardItem';
-import { AccountContext } from '../../contexts/AccountContextProvider';
 import { storage } from '../../utils/storage';
 
 function FavoritesPage() {
-  const loggedInContext = useContext(AccountContext);
+  const store = storage;
 
-  // eslint-disable-next-line no-unused-vars
-  // const [favVids, setFavVids] = useState(loggedInContext.favoriteVideos);
-  const favVids = storage.get('favoriteVideos').items;
+  const favVids = () => {
+    if (store.get('favoriteVideos')) {
+      return store.get('favoriteVideos').items;
+    }
+    return [];
+  };
 
-  const hasFavVids = !favVids;
+  const hasFavVids = !!favVids();
 
-  if (hasFavVids) {
+  if (!hasFavVids) {
     return <div>You haven&apos;t added any favorite videos yet!</div>;
   }
 
@@ -22,7 +24,7 @@ function FavoritesPage() {
     <Styled.FavoritesPageWrapper>
       <Styled.Container>
         <Styled.Cards>
-          {favVids.map((d) => {
+          {favVids().map((d) => {
             return <CardItem item={d} fav />;
           })}
         </Styled.Cards>

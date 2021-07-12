@@ -1,17 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const VideoIframe = styled.iframe`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
+import Styled from './VideoEmbed.styled';
 
 function VideoEmbed(props) {
   return (
-    <VideoIframe
+    <Styled.VideoIframe
       src={props.url}
       title="YouTube video player"
       frameBorder="0"

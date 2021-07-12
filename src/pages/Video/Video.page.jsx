@@ -5,7 +5,6 @@ import Styled from './Video.styled';
 import VideoEmbed from '../../components/VideoEmbed';
 import RelatedVideos from '../../components/RelatedVideos';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
-import { AccountContext } from '../../contexts/AccountContextProvider';
 import { storage } from '../../utils/storage';
 
 function Video() {
@@ -24,7 +23,6 @@ function Video() {
   const buildURL = `https://www.youtube.com/embed/${videoId}`;
 
   const darkModeContext = useContext(AppearanceContext);
-  const loggedInContext = useContext(AccountContext);
 
   const isLoggedIn = !!storage.get('account');
   const store = storage;

@@ -2,13 +2,13 @@
 
 exports[`renders correctly 1`] = `
 <section
-  className="sc-gKAaRy iOqDQV"
+  className="sc-bdnxRM huhLlJ"
 >
   <div
-    className="sc-iCoGMd fFJguM"
+    className="sc-gtsrHT kJGVrV"
   >
     <div
-      className="sc-fujyAs coZxKS"
+      className="sc-dlnjwi kfZIKC"
     />
   </div>
 </section>
