@@ -4,10 +4,9 @@ import Styled from './RelatedVideos.styled';
 import RelatedVideoCard from '../RelatedVideoCard';
 import { API_KEY } from '../../utils/constants';
 import { storage } from '../../utils/storage';
+import fetchAPI from '../../utils/hooks/youtubeAPI';
 
 function RelatedVideos(props) {
-  const APIKey = API_KEY;
-
   const { videoId, favVids } = props;
   const [errors, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -24,10 +23,13 @@ function RelatedVideos(props) {
 
   useEffect(() => {
     if (videoId) {
-      const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&relatedToVideoId=${videoId}&type=video&key=${APIKey}`;
-      fetch(url)
+      // const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&relatedToVideoId=${videoId}&type=video&key=${APIKey}`;
+      // fetch(url)
+      fetchAPI
+        .fetchRelatedVideosFromId(videoId)
         .then((res) => res.json())
         .then((result) => {
+          debugger;
           if (result.error) {
             setError(true);
             setIsLoaded(true);

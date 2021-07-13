@@ -6,6 +6,7 @@ import mockData from '../../mock/youtube-videos-mock.json';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import { API_KEY } from '../../utils/constants';
 import Styled from './Home.styled';
+import fetchAPI from '../../utils/hooks/youtubeAPI';
 
 function HomePage() {
   const [errors, setError] = useState(false);
@@ -16,11 +17,13 @@ function HomePage() {
 
   useEffect(() => {
     if (searchContext.query) {
-      fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${encodeURI(
-          searchContext.query
-        )}&type=video&videoType=any&key=${APIKey}`
-      )
+      // fetch(
+      //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${encodeURI(
+      //     searchContext.query
+      //   )}&type=video&videoType=any&key=${APIKey}`
+      // )
+      fetchAPI
+        .fetchVideosFromQuery(searchContext.query)
         .then((res) => res.json())
         .then((result) => {
           if (result.error) {

@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import Styled from './AvatarLogo.styled';
 import { AccountContext } from '../../contexts/AccountContextProvider';
+import {storage} from '../../utils/storage';
 
 function AvatarLogo() {
-  const loggedInContext = useContext(AccountContext);
+  const store = storage;
+  const getAccountAvatar = () => {
+    if (store.get('account')) {
+      return store.get('account').avatarUrl;
+    }
+    return null;
+  };
 
-  const img = loggedInContext.account
-    ? loggedInContext.account.avatarUrl
-    : 'empty_avatar.png';
+  const img = getAccountAvatar() ? getAccountAvatar() : 'empty_avatar.png';
 
   return (
     <span>
