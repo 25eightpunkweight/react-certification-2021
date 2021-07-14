@@ -1,43 +1,21 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import CardItem from '../../components/CardItem';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import mockData from '../../mock/youtube-videos-mock.json';
 import { SearchContext } from '../../contexts/SearchContextProvider';
-import { API_KEY } from '../../utils/constants';
 import Styled from './Home.styled';
 import fetchAPI from '../../utils/hooks/youtubeAPI';
 
 function HomePage() {
-  const [errors, setError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [results, setResults] = useState(mockData);
   const searchContext = useContext(SearchContext);
-  const APIKey = API_KEY;
-
-  useEffect(() => {
-    if (searchContext.query) {
-      // fetch(
-      //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${encodeURI(
-      //     searchContext.query
-      //   )}&type=video&videoType=any&key=${APIKey}`
-      // )
-      fetchAPI
-        .fetchVideosFromQuery(searchContext.query)
-        .then((res) => res.json())
-        .then((result) => {
-          if (result.error) {
-            setError(true);
-            setIsLoaded(true);
-          } else {
-            setResults(result);
-            setIsLoaded(true);
-          }
-        });
-    } else {
-      setIsLoaded(true);
-    }
-  }, [searchContext.query]);
+  // using let here instead of const because I need to change results into something else in case it's empty
+  // eslint-disable-next-line prefer-const
+  let [errors, isLoaded, results, fav] = fetchAPI(searchContext.query, true);
+  if (!results) {
+    results = mockData;
+  }
+  // debugger;
 
   if (errors) {
     return <div>Error</div>;
