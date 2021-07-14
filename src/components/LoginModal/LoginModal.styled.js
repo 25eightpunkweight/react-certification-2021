@@ -61,7 +61,7 @@ const Input = styled.input`
 const LoginContainer = styled.div`
   position: relative;
   height: 40%;
-  width: 20%;
+  width: 18em;
   text-align: center;
   display: flex;
   flex-direction: column;

@@ -5,13 +5,13 @@ import LoadingSpinner from '../../components/LoadingSpinner';
 import mockData from '../../mock/youtube-videos-mock.json';
 import { SearchContext } from '../../contexts/SearchContextProvider';
 import Styled from './Home.styled';
-import fetchAPI from '../../utils/hooks/youtubeAPI';
+import useFetch from '../../utils/hooks/youtubeAPI';
 
 function HomePage() {
   const searchContext = useContext(SearchContext);
   // using let here instead of const because I need to change results into something else in case it's empty
   // eslint-disable-next-line prefer-const
-  let [errors, isLoaded, results, fav] = fetchAPI(searchContext.query, true);
+  let [errors, isLoaded, results, fav] = useFetch(searchContext.query, true);
   if (!results) {
     results = mockData;
   }

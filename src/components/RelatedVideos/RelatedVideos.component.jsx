@@ -3,7 +3,7 @@ import Styled from './RelatedVideos.styled';
 
 import RelatedVideoCard from '../RelatedVideoCard';
 import { storage } from '../../utils/storage';
-import fetchAPI from '../../utils/hooks/youtubeAPI';
+import useFetch from '../../utils/hooks/youtubeAPI';
 
 function RelatedVideos(props) {
   const { videoId, favVids } = props;
@@ -16,7 +16,7 @@ function RelatedVideos(props) {
   };
   // using let here instead of const because I need to change results into something else in case it's empty
   // eslint-disable-next-line prefer-const
-  let [errors, isLoaded, results, fav] = fetchAPI(videoId, false);
+  let [errors, isLoaded, results, fav] = useFetch(videoId, false);
 
   if (fav) {
     results = favoriteVideos();
