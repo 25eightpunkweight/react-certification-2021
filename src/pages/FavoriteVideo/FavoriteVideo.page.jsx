@@ -24,7 +24,7 @@ function FavoriteVideo() {
     store.set('favoriteVideos', {
       items: filtered,
     });
-    if (filtered.length) {
+    if (filtered.length) { // if you still have other favorite videos, redirect to the next one
       const nextVideo = filtered[0];
       history.push({
         pathname: `/favorites/${nextVideo.id.videoId}`,
@@ -35,7 +35,7 @@ function FavoriteVideo() {
           etag: nextVideo.etag,
         },
       });
-    } else {
+    } else { // if no more favorite videos, redirect to home instead
       history.push('/');
     }
   };
