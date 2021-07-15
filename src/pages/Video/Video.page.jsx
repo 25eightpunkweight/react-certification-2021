@@ -26,6 +26,16 @@ function Video() {
 
   const isLoggedIn = !!storage.get('account');
   const store = storage;
+  const notYetFavorited = () => {
+    const favorites = store.get('favoriteVideos');
+    if (!favorites) { // base case
+      return true;
+    }
+    const filtered = favorites.items.filter((e) => {
+      return e.id.videoId === videoId;
+    });
+    return !filtered.length;
+  };
   const addToFavorites = () => {
     const append = {
       // making it look more like the youtube search result item for more familiar reading
@@ -60,7 +70,7 @@ function Video() {
       </Styled.VideoDiv>
       <Styled.DescriptionAndRelatedVideo>
         <Styled.VideoDetailsCard theme={{ darkMode: darkModeContext.darkMode }}>
-          {isLoggedIn && (
+          {isLoggedIn && notYetFavorited() && (
             <Styled.ButtonWrapper>
               <Styled.FavButton onClick={addToFavorites}>
                 Add to Favorites

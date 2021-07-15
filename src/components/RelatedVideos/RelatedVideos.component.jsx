@@ -19,7 +19,8 @@ function RelatedVideos(props) {
   let [errors, isLoaded, results, fav] = useFetch(videoId, false);
 
   if (fav) {
-    results = favoriteVideos();
+    // mimicking the videos list so it's easily readable
+    results = { items: favoriteVideos() };
   }
 
   const elementTitle = favVids ? 'Other Favorite Videos' : 'Related Videos';

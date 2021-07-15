@@ -14,9 +14,7 @@ function FavoritesPage() {
     return [];
   };
 
-  const hasFavVids = !!favVids();
-
-  if (!hasFavVids) {
+  if (!favVids().length) {
     return <div>You haven&apos;t added any favorite videos yet!</div>;
   }
 

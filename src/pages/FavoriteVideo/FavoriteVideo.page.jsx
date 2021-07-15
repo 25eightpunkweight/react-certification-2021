@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import Styled from '../Video/Video.styled';
 import VideoEmbed from '../../components/VideoEmbed';
 import RelatedVideos from '../../components/RelatedVideos';
 import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
+import { storage } from '../../utils/storage';
 
 function FavoriteVideo() {
   const location = useLocation();
@@ -13,6 +14,31 @@ function FavoriteVideo() {
   const buildURL = `https://www.youtube.com/embed/${videoId}`;
 
   const darkModeContext = useContext(AppearanceContext);
+  const store = storage;
+  const history = useHistory();
+  const removeFromFavorites = () => {
+    const favVids = store.get('favoriteVideos');
+    const filtered = favVids.items.filter((e) => {
+      return e.id.videoId != videoId;
+    });
+    store.set('favoriteVideos', {
+      items: filtered,
+    });
+    if (filtered.length) {
+      const nextVideo = filtered[0];
+      history.push({
+        pathname: `/favorites/${nextVideo.id.videoId}`,
+        state: {
+          videoId: nextVideo.id.videoId,
+          videoTitle: nextVideo.snippet.title,
+          videoDescription: nextVideo.snippet.description,
+          etag: nextVideo.etag,
+        },
+      });
+    } else {
+      history.push('/');
+    }
+  };
 
   return (
     <Styled.VideoSection data-testid="video-display">
@@ -21,6 +47,11 @@ function FavoriteVideo() {
       </Styled.VideoDiv>
       <Styled.DescriptionAndRelatedVideo>
         <Styled.VideoDetailsCard theme={{ darkMode: darkModeContext.darkMode }}>
+          <Styled.ButtonWrapper>
+            <Styled.FavButton onClick={removeFromFavorites}>
+              Remove From Favorites
+            </Styled.FavButton>
+          </Styled.ButtonWrapper>
           <Styled.VideoTitle theme={{ darkMode: darkModeContext.darkMode }}>
             {videoTitle}
           </Styled.VideoTitle>

@@ -15,7 +15,6 @@ function HomePage() {
   if (!results) {
     results = mockData;
   }
-  // debugger;
 
   if (errors) {
     return <div>Error</div>;
