@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Styled from './CardTitle.styled';
 
-const CardTitleDiv = styled.div`
-  margin: 1px;
-  height: 56px;
-`;
-
-const CardTitleText = styled.h4`
-  color: black;
-  font-size: 1em;
-`;
+import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 
 function CardTitle(props) {
-  const videoId = props.item.id.videoId;
-  const videoTitle = props.item.snippet.title;
-  const videoDescription = props.item.snippet.description;
+  const {
+    fav,
+    item: {
+      id: { videoId },
+      etag,
+      snippet: { title: videoTitle, description: videoDescription },
+    },
+  } = props;
+
+  const darkModeContext = useContext(AppearanceContext);
+
+  const path = () => {
+    const pathRoute = fav ? 'favorites' : 'video';
+    return {
+      pathname: `/${pathRoute}/${videoId}`,
+      state: {
+        videoId,
+        videoTitle,
+        videoDescription,
+        etag,
+      },
+    };
+  };
 
   return (
-    <CardTitleDiv>
-      <Link
-        to={{
-          pathname: `/video/${videoId}`,
-          state: {
-            videoId,
-            videoTitle,
-            videoDescription,
-          }
-        }}
-      >
-        <CardTitleText> {videoTitle} </CardTitleText>
+    <Styled.CardTitleDiv>
+      <Link to={path}>
+        <Styled.CardTitleText theme={{ darkMode: darkModeContext.darkMode }}>
+          {videoTitle}
+        </Styled.CardTitleText>
       </Link>
-    </CardTitleDiv>
+    </Styled.CardTitleDiv>
   );
 }
 

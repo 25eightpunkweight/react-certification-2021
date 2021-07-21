@@ -1,50 +1,92 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
 
+import Styled from './Video.styled';
 import VideoEmbed from '../../components/VideoEmbed';
 import RelatedVideos from '../../components/RelatedVideos';
-
-const VideoSection = styled.section`
-  margin-top: 22rem;
-  width: 90%;
-  height: fit-content;
-`;
-
-const VideoDetailsCard = styled.div`
-  word-wrap: break-word;
-  width: 70rem;
-  height: 10rem;
-`;
-
-const VideoDiv = styled.div`
-  width: fit-content;
-  margin-right: 0px;
-`;
-
-const VideoDescription = styled.div`
-  word-wrap: break-word;
-  overflow: auto;
-`;
+import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
+import { storage } from '../../utils/storage';
 
 function Video() {
   const location = useLocation();
-  const { videoId, videoTitle, videoDescription } = location.state;
+
+  let routeState;
+
+  if (location.state) {
+    storage.set('videoLocationState', JSON.stringify(location.state));
+    routeState = location.state;
+  } else {
+    routeState = storage.get('videoLocationState');
+    if (routeState) routeState = JSON.parse(routeState);
+  }
+  const { videoId, videoTitle, videoDescription, etag } = routeState;
   const buildURL = `https://www.youtube.com/embed/${videoId}`;
 
+  const darkModeContext = useContext(AppearanceContext);
+
+  const isLoggedIn = !!storage.get('account');
+  const store = storage;
+  const notYetFavorited = () => {
+    const favorites = store.get('favoriteVideos');
+    if (!favorites) { // base case
+      return true;
+    }
+    const filtered = favorites.items.filter((e) => {
+      return e.id.videoId === videoId;
+    });
+    return !filtered.length;
+  };
+  const addToFavorites = () => {
+    const append = {
+      // making it look more like the youtube search result item for more familiar reading
+      etag,
+      id: {
+        videoId,
+      },
+      snippet: {
+        title: videoTitle,
+        description: videoDescription,
+        thumbnails: {
+          default: {
+            url: `https://i.ytimg.com/vi/${videoId}/default.jpg`,
+          },
+          medium: {
+            url: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+          },
+        },
+      },
+    };
+    const faveVideos = store.get('favoriteVideos')
+      ? store.get('favoriteVideos')
+      : { items: [] };
+    faveVideos.items.push(append);
+    store.set('favoriteVideos', faveVideos);
+  };
+
   return (
-    <VideoSection>
-      <RelatedVideos videoId={videoId} />
-      <VideoDiv>
+    <Styled.VideoSection data-testid="video-display">
+      <Styled.VideoDiv>
         <VideoEmbed url={buildURL} />
-      </VideoDiv>
-      <VideoDetailsCard>
-        <h1>{videoTitle}</h1>
-        <VideoDescription>
-          <p>{videoDescription}</p>
-        </VideoDescription>
-      </VideoDetailsCard>
-    </VideoSection>
+      </Styled.VideoDiv>
+      <Styled.DescriptionAndRelatedVideo>
+        <Styled.VideoDetailsCard theme={{ darkMode: darkModeContext.darkMode }}>
+          {isLoggedIn && notYetFavorited() && (
+            <Styled.ButtonWrapper>
+              <Styled.FavButton onClick={addToFavorites}>
+                Add to Favorites
+              </Styled.FavButton>
+            </Styled.ButtonWrapper>
+          )}
+          <Styled.VideoTitle theme={{ darkMode: darkModeContext.darkMode }}>
+            {videoTitle}
+          </Styled.VideoTitle>
+          <Styled.VideoDescription theme={{ darkMode: darkModeContext.darkMode }}>
+            <p>{videoDescription}</p>
+          </Styled.VideoDescription>
+        </Styled.VideoDetailsCard>
+        <RelatedVideos videoId={videoId} />
+      </Styled.DescriptionAndRelatedVideo>
+    </Styled.VideoSection>
   );
 }
 

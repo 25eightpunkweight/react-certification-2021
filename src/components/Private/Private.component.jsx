@@ -1,13 +1,12 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-
-import { useAuth } from '../../providers/Auth';
+import { storage } from '../../utils/storage';
 
 function Private({ children, ...rest }) {
-  const { authenticated } = useAuth();
+  const isLoggedIn = !!storage.get('account');
 
   return (
-    <Route {...rest} render={() => (authenticated ? children : <Redirect to="/" />)} />
+    <Route {...rest} render={() => (isLoggedIn ? children : <Redirect to="/login" />)} />
   );
 }
 

@@ -1,45 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import Styled from './RelatedVideos.styled';
 
 import RelatedVideoCard from '../RelatedVideoCard';
-import mockRelatedVideos from '../../mock/youtube-mock-related-videos.json';
-import { API_KEY } from '../../utils/constants';
-
-const RelatedVideosWrapper = styled.div`
-  word-wrap: break-word;
-  height: fit-content;
-  width: 20em;
-  float: right;
-  margin: 0px;
-`;
-
-const EmptyDiv = styled.div`
-  width: 360px;
-  height: 112px;
-`;
+import { storage } from '../../utils/storage';
+import useFetch from '../../utils/hooks/youtubeAPI';
 
 function RelatedVideos(props) {
-  const APIKey = API_KEY;
+  const { videoId, favVids } = props;
 
-  const { videoId } = props;
-  const [errors, setError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [results, setResults] = useState(null);
+  const favoriteVideos = () => {
+    if (favVids && storage.get('favoriteVideos')) {
+      return storage.get('favoriteVideos').items;
+    }
+    return null;
+  };
+  // using let here instead of const because I need to change results into something else in case it's empty
+  // eslint-disable-next-line prefer-const
+  let [errors, isLoaded, results, fav] = useFetch(videoId, false);
 
-  useEffect(() => {
-    const url = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&relatedToVideoId=${videoId}&type=video&key=${APIKey}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.error) {
-          setError(true);
-          setIsLoaded(true);
-        } else {
-          setResults(result);
-          setIsLoaded(true);
-        }
-      });
-  }, [videoId]);
+  if (fav) {
+    // mimicking the videos list so it's easily readable
+    results = { items: favoriteVideos() };
+  }
+
+  const elementTitle = favVids ? 'Other Favorite Videos' : 'Related Videos';
 
   if (errors) {
     return <h1>Error</h1>;
@@ -50,14 +34,17 @@ function RelatedVideos(props) {
   }
 
   return (
-    <RelatedVideosWrapper>
-      {results.items.map(function (d) {
-        if (d.snippet) {
-          return RelatedVideoCard(d);
-        }
-      })}
-      <EmptyDiv />
-    </RelatedVideosWrapper>
+    <Styled.RelatedVideosWrapper data-testid="related-videos">
+      <h2>{elementTitle}</h2>
+      {results &&
+        results.items.map((d) => {
+          if (d.snippet) {
+            return <RelatedVideoCard key={d.etag} item={d} favVids={favVids} />;
+          }
+          return <h1>Error</h1>;
+        })}
+      <Styled.EmptyDiv />
+    </Styled.RelatedVideosWrapper>
   );
 }
 

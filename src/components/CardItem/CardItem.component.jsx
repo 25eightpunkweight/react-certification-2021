@@ -1,28 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react';
+import Styled from './CardItem.styled';
 
 import ImgWrap from '../ImgWrap';
 import CardTitle from '../CardTitle';
 
-const CardItemDiv = styled.div`
-  height: 330px;
-  background-color: white;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  margin: 5px;
-  flex-basis: calc(20% - 22px);
-  position: relative;
-`;
+import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 
-function CardItem(item) {
+function CardItem(props) {
+  const darkModeContext = useContext(AppearanceContext);
+  const { item, fav } = props;
+
   return (
-    <CardItemDiv key={item.etag} data-testid="card-item">
-      <CardTitle item={item} />
+    <Styled.CardItemDiv
+      key={item.etag}
+      theme={{ darkMode: darkModeContext.darkMode }}
+      data-testid="card-item"
+    >
+      <CardTitle item={item} fav={fav} />
       <ImgWrap
         image={item.snippet.thumbnails.medium.url}
         hover_text={item.snippet.description}
       />
-    </CardItemDiv>
+    </Styled.CardItemDiv>
   );
 }
 

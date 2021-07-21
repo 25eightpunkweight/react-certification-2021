@@ -1,18 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const LayoutWrapper = styled.main`
-  width: 99vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 0rem;
-`;
+import Styled from './Layout.styled';
 
 function Layout({ children }) {
-  return <LayoutWrapper>{children}</LayoutWrapper>;
+  return <Styled.LayoutWrapper>{children}</Styled.LayoutWrapper>;
 }
 
 export default Layout;

@@ -1,60 +1,44 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import Styled from './RelatedVideoCard.styled';
 
-const VideoCardTitle = styled.div`
-  padding-left: 7.5em;
-`;
+import { AppearanceContext } from '../../contexts/AppearanceContextProvider';
 
-const CardWrapper = styled.div`
-  height: 120px;
-  width: 370px;
-  border-style: solid;
-`;
+function RelatedVideoCard(props) {
+  const darkModeContext = useContext(AppearanceContext);
 
-const VideoThumbnailWrapper = styled.div`
-  height: 90px;
-  width: 120px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  float: left;
-  margin-right: 3px;
-`;
+  const { item, favVids } = props;
 
-const VideoThumbnail = styled.img`
-  height: 90px;
-  width: 120px;
-`;
-
-function RelatedVideoCard(item) {
   const { videoId } = item.id;
 
   const videoTitle = item.snippet.title;
   const videoDescription = item.snippet.description;
+  const { etag } = item;
+
+  const path = () => {
+    const pathRoute = favVids ? 'favorites' : 'video';
+    return {
+      pathname: `/${pathRoute}/${videoId}`,
+      state: {
+        videoId,
+        videoTitle,
+        videoDescription,
+        etag,
+      },
+    };
+  };
 
   return (
-    <CardWrapper key={item.etag}>
-      <Link
-        data-testid="related-video-card"
-        to={{
-          pathname: `/video/${videoId}`,
-          state: {
-            videoId,
-            videoTitle,
-            videoDescription,
-          }
-        }}
-        key={item.etag}
-      >
-        <VideoThumbnailWrapper>
-          <VideoThumbnail src={item.snippet.thumbnails.default.url} />
-        </VideoThumbnailWrapper>
-        <VideoCardTitle>
+    <Styled.CardWrapper key={item.etag} theme={{ darkMode: darkModeContext.darkMode }}>
+      <Link data-testid="related-video-card" to={path} key={item.etag}>
+        <Styled.VideoThumbnailWrapper>
+          <Styled.VideoThumbnail src={item.snippet.thumbnails.default.url} />
+        </Styled.VideoThumbnailWrapper>
+        <Styled.VideoCardTitle theme={{ darkMode: darkModeContext.darkMode }}>
           <h5>{videoTitle}</h5>
-        </VideoCardTitle>
+        </Styled.VideoCardTitle>
       </Link>
-    </CardWrapper>
+    </Styled.CardWrapper>
   );
 }
 
